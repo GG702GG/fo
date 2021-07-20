@@ -7327,17 +7327,17 @@ end
 --     By Developer Faeder     -- 
 if text == 'تغيير C' then
 
-    if not leader(msg) then
+    if not is_leader(msg) then
     send(msg.chat_id_,msg.id_,' هذا الامر خاص Devil فقط')
     return false
     end
-    redis:set(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_,true)
+    faederdx1:set(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_,true)
     send(msg.chat_id_, msg.id_,' ارسل الان معرف Devil الجديد')
     return false
     end
-    if text and redis:get(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_) then
+    if text and faederdx1:get(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_) then
     if text == 'الغاء' then 
-    redis:del(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_)
+    faederdx1:del(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_)
     send(msg.chat_id_, msg.id_,' تم الغاء تغيير Carbon')
     return false
     end
