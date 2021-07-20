@@ -7325,6 +7325,54 @@ end
 faederdx(msg.chat_id_, msg.id_, 1, '↫ احصائيات البوت ، \n         ───────────────~~\n↫ عدد القروبات ، '..gps..'\n↫ عدد الاعضاء ، '..users..' \n↫ عدد كل رسائل المجموعات ، '..allmgs..'\n↫ المغادره التلقائيه ، '..autoleavear..'\n↫ رساله ستارت ، '..clerkar, 1, 'md')
 end 
 --     By Developer Faeder     -- 
+if text == 'تغيير C' then
+
+    if not leader(msg) then
+    send(msg.chat_id_,msg.id_,' هذا الامر خاص Devil فقط')
+    return false
+    end
+    redis:set(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_,true)
+    send(msg.chat_id_, msg.id_,' ارسل الان معرف Devil الجديد')
+    return false
+    end
+    if text and redis:get(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_) then
+    if text == 'الغاء' then 
+    redis:del(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_)
+    send(msg.chat_id_, msg.id_,' تم الغاء تغيير Carbon')
+    return false
+    end
+    local username = text:gsub('@','')
+    tdcli_function ({ID = "SearchPublicChat",username_ = username}, function(extra, result, success)
+    if result.id_ then
+    if (result and result.type_ and result.type_.ID == "ChannelChatInfo") then
+    send(msg.chat_id_,msg.id_,"• عذرا عزيزي هذا معرف قناة يرجى ارسال المعرف مره اخره")   
+    return false 
+    end      
+    local file_config = io.open("Config.lua", 'w')
+    file_config:write([[
+    do local _ = {
+        SUDO = ]]..sudo..[[,
+        bot_id = "]]..bot_id..[[",
+        sudo_users = {
+          ]]..sudo..[[
+        },
+        token = "]]..token..[[",
+        username = "]]..SudoFaeder..[["
+      }
+      return _
+      end
+    ]])
+    file_config:close()
+    else
+    send(msg.chat_id_, msg.id_, '• لا يوجد حساب بهذا المعرف')
+    end
+    end, nil)
+    redis:del(bot_id..'Set:Text:Dev:Bot:id'..msg.chat_id_)
+    send(msg.chat_id_, msg.id_,'تم تغيير Devil \n الرجاء ارسل امر [تحديث]')
+    dofile('Config.lua')  
+    return false
+    end
+---------------------------------------------------
 if text == "تنظيف القروبات" and is_sudo(msg) then 
 local group = faederdx1:smembers(FAEDER.."bot:groups")
 local w = 0
