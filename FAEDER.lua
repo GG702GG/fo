@@ -6625,7 +6625,27 @@ faederdx(msg.chat_id_, msg.id_, 1, texts, 1, 'html')
 end end
 resolve_username(ap[2],invite_by_username)
 end end
---     By Developer Faeder     -- 
+--     By Developer Faeder     --
+if text == "رابط القروب" then
+  
+  tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,ta) 
+  local status_Link = redis:get(bot_id.."Eqap:Link_Group"..msg.chat_id_)
+  local link = redis:get(bot_id.."Eqap:link:set:Group"..msg.chat_id_)     
+         
+  if link then                              
+  send1(msg.chat_id_,msg.id_,"["..ta.title_.."]("..link..")")                          
+  else                
+  local linkgpp = json:decode(https.request('https://api.telegram.org/bot'..token..'/exportChatInviteLink?chat_id='..msg.chat_id_))
+  if linkgpp.ok == true then 
+  send1(msg.chat_id_,msg.id_,"["..ta.title_.."]("..linkgpp.result..")")                          
+  else
+  send(msg.chat_id_, msg.id_,"• لا يوجد رابط للمجموعه")              
+  end            
+  end
+  end,nil)
+  return false 
+  end 
+--------------------------------
 if text and text:match("^[Ii]nvite (%d+)$") then 
 local ap = {string.match(text, "^([Ii]nvite) (%d+)$")}
 add_user(msg.chat_id_, ap[2], 5)
