@@ -6629,8 +6629,8 @@ end end
 if text == "رابط القروب" then
   
   tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,ta) 
-  local status_Link = redis:get(bot_id.."Eqap:Link_Group"..msg.chat_id_)
-  local link = redis:get(bot_id.."Eqap:link:set:Group"..msg.chat_id_)     
+  local status_Link = faederdx1:get(FAEDER.."Eqap:Link_Group"..msg.chat_id_)
+  local link = faederdx1:get(FAEDER.."Eqap:link:set:Group"..msg.chat_id_)     
          
   if link then                              
   send1(msg.chat_id_,msg.id_,"["..ta.title_.."]("..link..")")                          
