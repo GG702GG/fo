@@ -3417,7 +3417,7 @@ else
 if not faederdx1:get(FAEDER.."bot:tt:link:"..msg.chat_id_) then 
 local link = faederdx1:get(FAEDER.."bot:group:link"..msg.chat_id_)
 if link then
-faederdx(msg.chat_id_, msg.id_, 1, "↫ *رابط المجموعة* .\n\n" .. link, 1, "md")
+faederdx(msg.chat_id_,msg.id_,"["..ta.title_.."]("..link..")")
 else 
 faederdx(msg.chat_id_, msg.id_, 1, '↫ لم يتم حفظ رابط المجموعه ارسل لي (ضع رابط) ليتم حفظه 📥 ', 1, 'md')
 end else
@@ -6630,7 +6630,7 @@ if text == "رابط القروب" then
   
   tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,ta) 
   local status_Link = faederdx1:get(FAEDER.."Eqap:Link_Group"..msg.chat_id_)
-  local link = faederdx1:get(FAEDER.."Eqap:link:set:Group"..msg.chat_id_)     
+  local link = redis:get(FAEDER.."Eqap:link:set:Group"..msg.chat_id_)     
          
   if link then                              
   send1(msg.chat_id_,msg.id_,"["..ta.title_.."]("..link..")")                          
